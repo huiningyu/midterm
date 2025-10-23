@@ -1,0 +1,21 @@
+services:
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    environment:
+      - MODE=FAILFAST
+    ports: ["8000:8000"]
+    depends_on: [inventory, payment]
+
+  inventory:
+    build:
+      context: ./inventory
+      dockerfile: Dockerfile
+    ports: ["8003:8003"]
+
+  payment:
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
+    ports: ["8002:8002"]
